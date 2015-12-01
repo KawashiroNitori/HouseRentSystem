@@ -14,8 +14,3 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_pushButton_clicked()
-{
-    Sleep(2000);
-    this->show();
-}
