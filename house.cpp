@@ -2,7 +2,7 @@
 
 int House::total=10000;
 
-House::House(int64_t t_conId,Person& t_owner,QString t_Addr,int t_Square,QString t_Type,QString t_Remark):
+House::House(int64_t t_conId,Person& t_owner,QString t_Addr,double t_Square,QString t_Type,QString t_Remark):
     contractId(t_conId),
     Owner(t_owner),
     Address(t_Addr),
@@ -33,7 +33,7 @@ QString House::getAddress() const
     return Address;
 }
 
-int House::getSquare() const
+double House::getSquare() const
 {
     return Square;
 }

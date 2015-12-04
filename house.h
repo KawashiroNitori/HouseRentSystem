@@ -13,12 +13,12 @@ private:
     int64_t contractId;
     Person& Owner;
     QString Address;
-    int Square;
+    double Square;
     QString Type;
     QString Remark;
 
 public:
-    House(int64_t t_conId,Person& t_owner,QString t_Addr,int t_Square,QString t_Type,QString t_Remark);
+    House(int64_t t_conId,Person& t_owner,QString t_Addr,double t_Square,QString t_Type,QString t_Remark);
     int64_t getID() const;
     int64_t getContractID() const;
     Person& getOwner() const;
