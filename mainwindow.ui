@@ -18,34 +18,10 @@
     <item>
      <layout class="QGridLayout" name="gridLayout">
       <item row="0" column="0">
-       <widget class="QTabWidget" name="tabWidget">
-        <widget class="QWidget" name="tab">
-         <attribute name="title">
-          <string>Tab 1</string>
-         </attribute>
-        </widget>
-        <widget class="QWidget" name="tab_2">
-         <attribute name="title">
-          <string>Tab 2</string>
-         </attribute>
-        </widget>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QTabWidget" name="tabWidget_2">
-        <property name="currentIndex">
-         <number>1</number>
+       <widget class="QTableView" name="tableView">
+        <property name="editTriggers">
+         <set>QAbstractItemView::NoEditTriggers</set>
         </property>
-        <widget class="QWidget" name="tab_3">
-         <attribute name="title">
-          <string>Tab 1</string>
-         </attribute>
-        </widget>
-        <widget class="QWidget" name="tab_4">
-         <attribute name="title">
-          <string>Tab 2</string>
-         </attribute>
-        </widget>
        </widget>
       </item>
      </layout>
@@ -65,9 +41,6 @@
     <property name="title">
      <string>文件</string>
     </property>
-    <addaction name="actionNew"/>
-    <addaction name="actionOpen"/>
-    <addaction name="separator"/>
     <addaction name="actionQuit"/>
    </widget>
    <addaction name="menu"/>

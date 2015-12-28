@@ -1,25 +1,20 @@
 #include "person.h"
 
-//Validity of arguments will be checked before constructor
-Person::Person(QString ID,QString name,QString Addr,int64_t Tel): Identifier(ID), Name(name), Address(Addr), TelNumber(Tel)
+bool Person::isIDValid(string id)
 {
-    int year=0,month=0,day=0;
-    for (int i=6;i<=9;i++)
-    {
-        year*=10;
-        year+=ID[i].digitValue();
-    }
-    for (int i=10;i<=11;i++)
-    {
-        month*=10;
-        month+=ID[i].digitValue();
-    }
-    for (int i=12;i<=13;i++)
-    {
-        day*=10;
-        day+=ID[i].digitValue();
-    }
-    Birthday.setDate(year,month,day);
+    int i,sum,n;
+    if (id.length()!=18)
+        return false;
+    for (sum=i=0;i<17;i++)
+        sum+=((1<<(18-i-1))%11)*(id[i]-'0');
+    n=(12-(sum%11))%11;
+    return ((n<10 && n==id[17]-'0') || (n==10 && id[17]=='X'));
+}
+
+//Validity of arguments will be checked before constructor
+Person::Person(QString ID,QString name,QString Addr,int64_t Tel): Identifier(ID), Name(name), Address(Addr), TelNumber(Tel),
+    Birthday(QDate::fromString(ID.mid(6,8),"yyyyMMdd"))
+{
     Sex=ID[16].digitValue()&1;
 
     QDate nowDate=QDate::currentDate();

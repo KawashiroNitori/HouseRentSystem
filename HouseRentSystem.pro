@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT       += sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -16,11 +17,21 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     person.cpp \
     house.cpp \
-    contract.cpp
+    contract.cpp \
+    configmanager.cpp \
+    dialogeditperson.cpp \
+    databasewrapper.cpp
 
 HEADERS  += mainwindow.h \
     person.h \
     house.h \
-    contract.h
+    contract.h \
+    configmanager.h \
+    dialogeditperson.h \
+    databasewrapper.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    dialogeditperson.ui
+
+DISTFILES += \
+    sqlite3.lib

@@ -5,7 +5,7 @@
 #include <QString>
 using namespace std;
 
-#define SEXTYPE int16_t
+#define SEXTYPE int8_t
 #define SEX_MALE 1
 #define SEX_FEMALE 0
 
@@ -21,6 +21,7 @@ private:
     int64_t TelNumber;
 
 public:
+    static bool isIDValid(string id);
     Person(QString ID,QString name,QString Addr,int64_t Tel);
     QString getID() const;
     QString getName() const;

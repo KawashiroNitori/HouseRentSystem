@@ -1,8 +1,7 @@
 #include "house.h"
+#include "configmanager.h"
 
-int House::total=10000;
-
-House::House(int64_t t_conId,Person& t_owner,QString t_Addr,double t_Square,QString t_Type,QString t_Remark):
+House::House(QString t_conId,Person& t_owner,QString t_Addr,double t_Square,QString t_Type,QString t_Remark):
     contractId(t_conId),
     Owner(t_owner),
     Address(t_Addr),
@@ -10,15 +9,18 @@ House::House(int64_t t_conId,Person& t_owner,QString t_Addr,double t_Square,QStr
     Type(t_Type),
     Remark(t_Remark)
 {
-    Identifier=++total;
+    Identifier="H";
+    Identifier+=QDate::currentDate().toString("yyyyMMdd");
+    Identifier+=QString("%1").arg(ConfigManager::getInstance().addTotal(),4,10,QChar('0'));
+
 }
 
-int64_t House::getID() const
+QString House::getID() const
 {
     return Identifier;
 }
 
-int64_t House::getContractID() const
+const QString House::getContractID() const
 {
     return contractId;
 }
@@ -65,7 +67,7 @@ void House::setAddress(QString addr)
     Address=addr;
 }
 
-void House::setSquare(int sq)
+void House::setSquare(double sq)
 {
     Square=sq;
 }
@@ -79,13 +81,6 @@ void House::setRemark(QString remark)
 {
     Remark=remark;
 }
-
-void House::setTotal(int tot)
-{
-    total=tot;
-    //temp
-}
-
 
 
 

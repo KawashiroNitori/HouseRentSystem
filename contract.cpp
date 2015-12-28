@@ -1,6 +1,5 @@
 #include "contract.h"
-
-int Contract::total=10000;
+#include "configmanager.h"
 
 Contract::Contract(House& t_house,Person& t_Holder,QDate t_startDate,QDate t_endDate,QString t_Remark):
     house(t_house),
@@ -9,7 +8,15 @@ Contract::Contract(House& t_house,Person& t_Holder,QDate t_startDate,QDate t_end
     endDate(t_endDate),
     Remark(t_Remark)
 {
-    Identifier=++total;
+    Identifier="C";
+    Identifier+=QDate::currentDate().toString("yyyyMMdd");
+    Identifier+=QString("%1").arg(ConfigManager::getInstance().addTotal(),4,10,QChar('0'));
+
+}
+
+const QString Contract::getID() const
+{
+    return Identifier;
 }
 
 House& Contract::getHouse() const
@@ -42,9 +49,30 @@ QString Contract::getRemark() const
     return Remark;
 }
 
+void Contract::setRent(uint32_t _rent)
+{
+    rent=_rent;
+}
+
+void Contract::setStartDate(QDate date)
+{
+    startDate=date;
+}
+
 void Contract::setStartDate(int year, int month, int day)
 {
     startDate.setDate(year,month,day);
+}
+
+bool Contract::setEndDate(QDate date)
+{
+    if (date<QDate::currentDate())
+    {
+        endDate=date;
+        return true;
+    }
+    else
+        return false;
 }
 
 bool Contract::setEndDate(int year, int month, int day)
@@ -62,12 +90,6 @@ bool Contract::setEndDate(int year, int month, int day)
 void Contract::setRemark(QString remark)
 {
     Remark=remark;
-}
-
-void Contract::setTotal(int tot)
-{
-    total=tot;
-    //temp
 }
 
 
