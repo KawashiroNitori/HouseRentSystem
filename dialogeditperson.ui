@@ -48,7 +48,7 @@
        <number>18</number>
       </property>
       <property name="clearButtonEnabled">
-       <bool>true</bool>
+       <bool>false</bool>
       </property>
      </widget>
     </item>
@@ -65,7 +65,7 @@
        <number>50</number>
       </property>
       <property name="clearButtonEnabled">
-       <bool>true</bool>
+       <bool>false</bool>
       </property>
      </widget>
     </item>
@@ -82,7 +82,7 @@
        <number>50</number>
       </property>
       <property name="clearButtonEnabled">
-       <bool>true</bool>
+       <bool>false</bool>
       </property>
      </widget>
     </item>
@@ -95,8 +95,11 @@
     </item>
     <item row="3" column="1">
      <widget class="QLineEdit" name="LineEditAddr">
+      <property name="maxLength">
+       <number>255</number>
+      </property>
       <property name="clearButtonEnabled">
-       <bool>true</bool>
+       <bool>false</bool>
       </property>
      </widget>
     </item>
@@ -170,22 +173,6 @@
  </widget>
  <resources/>
  <connections>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>DialogEditPerson</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>

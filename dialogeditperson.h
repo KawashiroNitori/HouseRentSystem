@@ -28,9 +28,10 @@ private slots:
 
     void on_buttonBox_accepted();
 
+
 private:
     Ui::DialogEditPerson *ui;
-    Person* person;
+    Person** person;
     QRegExpValidator* validatorIDPtr;
     QRegExpValidator* validatorTelPtr;
     void tryEnableOK(QString str);

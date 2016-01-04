@@ -18,18 +18,18 @@ private:
     QString Address;
     int Age;
     QDate Birthday;
-    int64_t TelNumber;
+    QString TelNumber;
 
 public:
     static bool isIDValid(string id);
-    Person(QString ID,QString name,QString Addr,int64_t Tel);
+    Person(QString ID,QString name,QString Addr,QString Tel);
     QString getID() const;
     QString getName() const;
     SEXTYPE getSex() const;
     QString getAddress() const;
     int getAge() const;
     QDate getBirthday() const;
-    int64_t getTel() const;
+    QString getTel() const;
     void setName(QString name);
     void setAddress(QString Addr);
     void setTel(int64_t tel);

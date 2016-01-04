@@ -18,20 +18,29 @@ SOURCES += main.cpp\
     person.cpp \
     house.cpp \
     contract.cpp \
-    configmanager.cpp \
     dialogeditperson.cpp \
-    databasewrapper.cpp
+    dialogselectperson.cpp \
+    databasemanager.cpp \
+    dialogedithouse.cpp \
+    dialogselecthouse.cpp \
+    dialogeditcontract.cpp
 
 HEADERS  += mainwindow.h \
     person.h \
     house.h \
     contract.h \
-    configmanager.h \
     dialogeditperson.h \
-    databasewrapper.h
+    dialogselectperson.h \
+    databasemanager.h \
+    dialogedithouse.h \
+    dialogselecthouse.h \
+    dialogeditcontract.h
 
 FORMS    += mainwindow.ui \
-    dialogeditperson.ui
+    dialogeditperson.ui \
+    dialogselectperson.ui \
+    dialogedithouse.ui \
+    dialogselecthouse.ui \
+    dialogeditcontract.ui
 
-DISTFILES += \
-    sqlite3.lib
+DISTFILES +=

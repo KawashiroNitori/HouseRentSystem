@@ -12,7 +12,7 @@ bool Person::isIDValid(string id)
 }
 
 //Validity of arguments will be checked before constructor
-Person::Person(QString ID,QString name,QString Addr,int64_t Tel): Identifier(ID), Name(name), Address(Addr), TelNumber(Tel),
+Person::Person(QString ID,QString name,QString Addr,QString Tel): Identifier(ID), Name(name), Address(Addr), TelNumber(Tel),
     Birthday(QDate::fromString(ID.mid(6,8),"yyyyMMdd"))
 {
     Sex=ID[16].digitValue()&1;
@@ -57,7 +57,7 @@ QDate Person::getBirthday() const
     return Birthday;
 }
 
-int64_t Person::getTel() const
+QString Person::getTel() const
 {
     return TelNumber;
 }

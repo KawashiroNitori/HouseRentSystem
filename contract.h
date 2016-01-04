@@ -11,24 +11,24 @@ class Contract
 {
 private:
     QString Identifier;
-    House& house;
-    Person& Holder;
-    uint32_t rent;
+    House house;
+    Person Holder;
+    int32_t rent;
     QDate startDate;
     QDate endDate;
     QString Remark;
 
 public:
-    Contract(House& t_house,Person& t_Holder,QDate t_startDate,QDate t_endDate,QString t_Remark);
-    const QString getID() const;
-    House& getHouse() const;
-    Person& getOwner() const;
-    Person& getHolder() const;
+    Contract(QString id,Person& t_Holder,House& t_house,QDate t_startDate,QDate t_endDate,int32_t t_rent,QString t_Remark);
+    QString getID() const;
+    House getHouse() const;
+    Person getOwner() const;
+    Person getHolder() const;
     int32_t getRent() const;
     QDate getStartDate() const;
     QDate getEndDate() const;
     QString getRemark() const;
-    void setRent(uint32_t _rent);
+    void setRent(int32_t _rent);
     void setStartDate(QDate date);
     void setStartDate(int year,int month,int day);
     bool setEndDate(QDate date);

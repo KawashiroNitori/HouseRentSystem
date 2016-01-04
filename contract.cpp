@@ -1,37 +1,39 @@
 #include "contract.h"
-#include "configmanager.h"
 
-Contract::Contract(House& t_house,Person& t_Holder,QDate t_startDate,QDate t_endDate,QString t_Remark):
+Contract::Contract(QString id, Person &t_Holder, House &t_house, QDate t_startDate, QDate t_endDate, int32_t t_rent, QString t_Remark):
+    Identifier(id),
     house(t_house),
     Holder(t_Holder),
     startDate(t_startDate),
     endDate(t_endDate),
+    rent(t_rent),
     Remark(t_Remark)
 {
-    Identifier="C";
-    Identifier+=QDate::currentDate().toString("yyyyMMdd");
-    Identifier+=QString("%1").arg(ConfigManager::getInstance().addTotal(),4,10,QChar('0'));
-
 }
 
-const QString Contract::getID() const
+QString Contract::getID() const
 {
     return Identifier;
 }
 
-House& Contract::getHouse() const
+House Contract::getHouse() const
 {
     return house;
 }
 
-Person& Contract::getOwner() const
+Person Contract::getOwner() const
 {
     return house.getOwner();
 }
 
-Person& Contract::getHolder() const
+Person Contract::getHolder() const
 {
     return Holder;
+}
+
+int32_t Contract::getRent() const
+{
+    return rent;
 }
 
 QDate Contract::getStartDate() const
@@ -49,7 +51,7 @@ QString Contract::getRemark() const
     return Remark;
 }
 
-void Contract::setRent(uint32_t _rent)
+void Contract::setRent(int32_t _rent)
 {
     rent=_rent;
 }

@@ -9,18 +9,17 @@ class House
 {
 private:
     QString Identifier;
-    QString contractId;
-    Person& Owner;
+    Person Owner;
     QString Address;
     double Square;
     QString Type;
     QString Remark;
 
 public:
-    House(QString t_conId, Person& t_owner, QString t_Addr, double t_Square, QString t_Type, QString t_Remark);
+    House(QString t_id, Person& t_owner, QString t_Addr, double t_Square, QString t_Type, QString t_Remark);
     QString getID() const;
     const QString getContractID() const;
-    Person& getOwner() const;
+    Person getOwner() const;
     QString getAddress() const;
     double getSquare() const;
     QString getType() const;

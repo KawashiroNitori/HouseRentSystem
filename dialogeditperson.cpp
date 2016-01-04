@@ -3,19 +3,19 @@
 #include "dialogeditperson.h"
 #include "ui_dialogeditperson.h"
 #include "person.h"
+#include "databasemanager.h"
 #include <Qt>
 #include <QPushButton>
+#include <QMessageBox>
 
 DialogEditPerson::DialogEditPerson(Person** _person, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::DialogEditPerson),
-    person(*_person)
+    person(_person)
 {
     ui->setupUi(this);
     setWindowFlags(Qt::Dialog|Qt::WindowCloseButtonHint);
     setFixedSize(size());
-    if (!person)
-        ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
     ui->buttonBox->button(QDialogButtonBox::Ok)->setDefault(true);
     ui->buttonBox->button(QDialogButtonBox::Ok)->setText(QString("确定"));
     ui->buttonBox->button(QDialogButtonBox::Cancel)->setText(QString("取消"));
@@ -23,10 +23,21 @@ DialogEditPerson::DialogEditPerson(Person** _person, QWidget *parent) :
     ui->LineEditID->setValidator(validatorIDPtr);
     validatorTelPtr=new QRegExpValidator(QRegExp("(\\d{11})|^((\\d{7,8})|(\\d{4}|\\d{3})-(\\d{7,8})|(\\d{4}|\\d{3})-(\\d{7,8})-(\\d{4}|\\d{3}|\\d{2}|\\d{1})|(\\d{7,8})-(\\d{4}|\\d{3}|\\d{2}|\\d{1}))"),ui->LineEditTel);
     ui->LineEditTel->setValidator(validatorTelPtr);
-    if (person)
-        setWindowTitle(QString("编辑个人"));
+    if (person && *person)
+    {
+        setWindowTitle("编辑个人");
+        ui->LineEditID->setText((*person)->getID());
+        ui->lineEditName->setText((*person)->getName());
+        ui->LineEditAddr->setText((*person)->getAddress());
+        ui->LineEditTel->setText((*person)->getTel());
+        on_LineEditID_textChanged((*person)->getID());
+        ui->LineEditID->setReadOnly(true);
+    }
     else
-        setWindowTitle(QString("创建个人"));
+    {
+        setWindowTitle("创建个人");
+        ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
+    }
 }
 
 DialogEditPerson::~DialogEditPerson()
@@ -38,14 +49,11 @@ DialogEditPerson::~DialogEditPerson()
 
 void DialogEditPerson::tryEnableOK(QString str)
 {
-    if (Person::isIDValid(ui->LineEditID->text().toStdString()) &&
-            ui->lineEditName->text().length()>0 &&
-            ui->LineEditAddr->text().length()>0 &&
-            ui->LineEditTel->text().length()>0 &&
-            str.length()>0)
-        ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
-    else
-        ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
+    ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(Person::isIDValid(ui->LineEditID->text().toStdString()) &&
+                                                                ui->lineEditName->text().length()>0 &&
+                                                                ui->LineEditAddr->text().length()>0 &&
+                                                                ui->LineEditTel->text().length()>0 &&
+                                                                str.length()>0);
 }
 
 void DialogEditPerson::on_LineEditID_textChanged(const QString &str)
@@ -61,7 +69,7 @@ void DialogEditPerson::on_LineEditID_textChanged(const QString &str)
     }
     if (validatorIDPtr->validate((QString)str,pos)!=QValidator::Acceptable || !Person::isIDValid(str.toStdString()))
         return;
-    Person tempP(str,ui->lineEditName->text(),ui->LineEditAddr->text(),ui->LineEditTel->text().toLongLong());
+    Person tempP(str,ui->lineEditName->text(),ui->LineEditAddr->text(),ui->LineEditTel->text());
     if (!tempP.getBirthday().isValid())
         return;
     ui->LineEditAge->setText(QString::number(tempP.getAge()));
@@ -89,7 +97,17 @@ void DialogEditPerson::on_LineEditAddr_textEdited(const QString &str)
 void DialogEditPerson::on_buttonBox_accepted()
 {
     if (!person)
-        person=new Person(ui->LineEditID->text(),ui->lineEditName->text(),ui->LineEditAddr->text(),ui->LineEditTel->text().toLongLong());
+        return;
+
+    if (this->windowTitle()=="添加个人" && DatabaseManager::getInstance().isPersonIDExisted(ui->LineEditID->text()))
+    {
+        QMessageBox::critical(this,"错误","当前已存在相同的身份证号。");
+        return;
+    }
+
+    if (!*person)
+        *person=new Person(ui->LineEditID->text(),ui->lineEditName->text(),ui->LineEditAddr->text(),ui->LineEditTel->text());
     else
-        *person=Person(ui->LineEditID->text(),ui->lineEditName->text(),ui->LineEditAddr->text(),ui->LineEditTel->text().toLongLong());
+        **person=Person(ui->LineEditID->text(),ui->lineEditName->text(),ui->LineEditAddr->text(),ui->LineEditTel->text());
+    this->accept();
 }
