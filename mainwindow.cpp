@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    setWindowTitle("房屋租赁管理系统");
 
     connect(ui->lineEditContract,SIGNAL(textChanged(QString)),this,SLOT(tryEnableSearchButton()));
     connect(ui->lineEditHouse,SIGNAL(textChanged(QString)),this,SLOT(tryEnableSearchButton()));
