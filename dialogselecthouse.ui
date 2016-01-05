@@ -61,5 +61,38 @@
   </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>DialogSelectHouse</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>325</x>
+     <y>538</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>324</x>
+     <y>279</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>DialogSelectHouse</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>325</x>
+     <y>538</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>324</x>
+     <y>279</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
